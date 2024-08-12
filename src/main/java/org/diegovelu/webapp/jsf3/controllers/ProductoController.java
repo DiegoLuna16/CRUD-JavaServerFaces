@@ -3,6 +3,8 @@ package org.diegovelu.webapp.jsf3.controllers;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Model;
 import jakarta.enterprise.inject.Produces;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.diegovelu.webapp.jsf3.models.Categoria;
@@ -21,6 +23,9 @@ public class ProductoController {
 
     @Inject
     private ProductoService service;
+
+    @Inject
+    private FacesContext facesContext;
 
     @Produces
     @Model
@@ -56,8 +61,8 @@ public class ProductoController {
         return "form.xhtml";
     }
 
-    public String eliminar(Long id){
-        service.eliminar(id);
+    public String eliminar(Producto producto){
+        service.eliminar(producto.getId());
         return "index.xhtml?faces-redirect=true";
     }
 
