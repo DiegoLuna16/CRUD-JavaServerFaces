@@ -3,16 +3,14 @@ package org.diegovelu.webapp.jsf3.controllers;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Model;
 import jakarta.enterprise.inject.Produces;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.diegovelu.webapp.jsf3.models.Categoria;
 import org.diegovelu.webapp.jsf3.models.Producto;
 import org.diegovelu.webapp.jsf3.services.ProductoService;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @Model
 public class ProductoController {
@@ -25,12 +23,13 @@ public class ProductoController {
     private ProductoService service;
 
     @Inject
-    private FacesContext facesContext;
+    private ResourceBundle bundle;
 
     @Produces
     @Model
     public String titulo() {
-        return "Hola mundo Javaserver Faces 3.0";
+//        return "Hola mundo Javaserver Faces 3.0";
+        return bundle.getString("producto.texto.titulo");
     }
 
     @Produces
@@ -63,7 +62,7 @@ public class ProductoController {
 
     public String eliminar(Producto producto){
         service.eliminar(producto.getId());
-        return "index.xhtml?faces-redirect=true";
+         return "index.xhtml?faces-redirect=true";
     }
 
     public String guardar (){
